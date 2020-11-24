@@ -1,16 +1,25 @@
 package br.com.rodrigo.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class BookingModel {
+public class BookingModel implements Serializable{
 
-    private String id;
-    private String reserveName;
-    private LocalDate checkIn;
-    private LocalDate checkOut;
-    private int numberGuests;
+    private final Integer id;
+    private final String reserveName;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private final LocalDate checkIn;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private final LocalDate checkOut;
+    private final int numberGuests;
 
-    public BookingModel(String id, String reserveName, LocalDate checkIn, LocalDate checkOut, int numberGuests) {
+    @JsonCreator
+    public BookingModel(@JsonProperty("id") Integer id, @JsonProperty("reserveName")String reserveName, @JsonProperty("checkIn") LocalDate checkIn, @JsonProperty("checkOut") LocalDate checkOut, @JsonProperty("numberGuests")  int numberGuests) {
         this.id = id;
         this.reserveName = reserveName;
         this.checkIn = checkIn;
@@ -18,43 +27,30 @@ public class BookingModel {
         this.numberGuests = numberGuests;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+
 
     public String getReserveName() {
         return reserveName;
     }
 
-    public void setReserveName(String reserveName) {
-        this.reserveName = reserveName;
-    }
+
 
     public LocalDate getCheckIn() {
         return checkIn;
     }
 
-    public void setCheckIn(LocalDate checkIn) {
-        this.checkIn = checkIn;
-    }
+
 
     public LocalDate getCheckOut() {
         return checkOut;
     }
 
-    public void setCheckOut(LocalDate checkOut) {
-        this.checkOut = checkOut;
-    }
 
     public int getNumberGuests() {
         return numberGuests;
-    }
-
-    public void setNumberGuests(int numberGuests) {
-        this.numberGuests = numberGuests;
     }
 }

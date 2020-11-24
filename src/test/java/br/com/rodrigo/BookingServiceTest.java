@@ -46,7 +46,7 @@ public class BookingServiceTest {
     public void setup(){
         LocalDate checkIn  = LocalDate.parse("2020-11-05");
         LocalDate checkOut = LocalDate.parse("2020-11-15");
-        BookingModel model = new BookingModel("1","Rodrigo",checkIn,checkOut,2);
+        BookingModel model = new BookingModel(1,"Rodrigo",checkIn,checkOut,2);
 
         Mockito.when(bookingRepository.findByReserveName(model.getReserveName())).thenReturn(java.util.Optional.of(model));
     }
